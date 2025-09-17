@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Kalam, Quicksand } from "next/font/google";
-import { FloatingNav } from "@/components/ui/floating-navbar";
 import { HomeIcon, MessageCircle, User2Icon } from "lucide-react";
 import Navbar, { Menu } from "@/components/ui/navbar-menu";
 const kalam = Quicksand({
