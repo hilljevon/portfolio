@@ -1,7 +1,7 @@
 import Image from "next/image"
 
 const kp_logo = "./kp_logo.png"
-const case_learn_snippet = "./Case_Learn_Snippet.png"
+const case_learn_snippet = "./case_learn_snippet.png"
 const tx_snippet = "./tx_tool_snippet.png"
 const data_db_snippet = "./data_db_snip.png"
 const posts = [
