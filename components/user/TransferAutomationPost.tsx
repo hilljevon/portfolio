@@ -8,6 +8,9 @@ export default function TransferAutomationPost() {
                 <h1 className="mt-2 text-4xl font-semibold tracking-tight text-pretty text-gray-900 sm:text-5xl dark:text-white">
                     Transfer Automation Dashboard
                 </h1>
+                <div className='my-6 text-xl/8 underline text-blue-400 hover:text-blue-300'>
+                    <a href='https://testing-git-demo-limited-jevons-projects-0dedbb2a.vercel.app/'>Sample</a>
+                </div>
                 <p className="mt-6 text-xl/8">
                     Summary: This web application provides two primary automation functions for inpatient case management workflows. First, it processes lengthy clinical summaries and generates condensed templates that physicians use to assess clinical stability. Second, it parses daily case census spreadsheets and automatically generates clinical request templates for medical centers. Together, these automations save analysts and nurses 2–3 hours per day. The tool is presented in a dynamic dashboard that displays repatriation details and other relevant information based on user input.
                 </p>
