@@ -8,6 +8,9 @@ export default function DataDashboardPost() {
                 <h1 className="mt-2 text-4xl font-semibold tracking-tight text-pretty text-gray-900 sm:text-5xl dark:text-white">
                     Dynamic Data Dashboard
                 </h1>
+                <div className='my-6 text-xl/8 underline text-blue-400 hover:text-blue-300'>
+                    <a href="https://phone-stats-cpfhanb1l-jevons-projects-0dedbb2a.vercel.app/">Sample</a>
+                </div>
                 <p className="mt-6 text-xl/8">
                     Summary: I was tasked with transforming raw customer service data into a dynamic, web-based dashboard for KP leadership. The project began by exporting the data to CSV, where I cleaned and filtered it using pandas. I structured the cleaning process into an object-oriented component to ensure reusability for future datasets. The processed data was then converted into JSON and passed to the front end, where it was visualized with interactive charts using ReChartsJS. Through multiple consultations with KP leadership, I identified and presented the most impactful visualizations.
                 </p>
