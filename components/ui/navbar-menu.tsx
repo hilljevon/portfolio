@@ -1,18 +1,7 @@
 "use client";
 import React, { useState } from "react";
-import { motion } from "motion/react";
+import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
-
-
-
-const transition = {
-  type: "spring",
-  mass: 0.5,
-  damping: 11.5,
-  stiffness: 100,
-  restDelta: 0.001,
-  restSpeed: 0.001,
-};
 
 export const MenuItem = ({
   setActive,
@@ -20,40 +9,45 @@ export const MenuItem = ({
   item,
   children,
 }: {
-  setActive: (item: string) => void;
+  setActive: (item: string | null) => void; // 👈 allow null here
   active: string | null;
   item: string;
   children?: React.ReactNode;
 }) => {
   return (
-    <div onMouseEnter={() => setActive(item)} className="relative ">
+    <div
+      className="relative"
+      onMouseEnter={() => setActive(item)}
+      onMouseLeave={() => setActive(null)} // handle leave locally instead of Menu
+    >
       <motion.p
         transition={{ duration: 0.3 }}
-        className="cursor-pointer text-[#e5caa5] hover:opacity-100 opacity-100"
+        className={cn(
+          "cursor-pointer text-sm font-medium transition-colors",
+          active === item
+            ? "text-[#7e4519] dark:text-[#e5caa5]"
+            : "text-neutral-700 dark:text-neutral-300 hover:text-[#7e4519] dark:hover:text-[#e5caa5]"
+        )}
       >
         {item}
       </motion.p>
-      {active !== null && (
-        <motion.div
-          initial={{ opacity: 0, scale: 0.85, y: 10 }}
-          animate={{ opacity: 1, scale: 1, y: 0 }}
 
+      {active === item && (
+        <motion.div
+          initial={{ opacity: 0, scale: 0.95, y: 8 }}
+          animate={{ opacity: 1, scale: 1, y: 0 }}
+          exit={{ opacity: 0, scale: 0.95, y: 8 }}
+          transition={{ duration: 0.25 }}
+          className="absolute top-[calc(100%+0.5rem)] left-1/2 transform -translate-x-1/2 z-50"
         >
-          {active === item && (
-            <div className="absolute top-[calc(100%_+_1.2rem)] left-1/2 transform -translate-x-1/2 pt-4">
-              <motion.div
-                layoutId="active" // layoutId ensures smooth animation
-                className="bg-[#2a2115] dark:bg-black backdrop-blur-sm rounded-2xl overflow-hidden border border-black/[0.2] dark:border-white/[0.2] shadow-xl opacity-100 text-white"
-              >
-                <motion.div
-                  layout // layout ensures smooth animation
-                  className="w-max h-full p-4"
-                >
-                  {children}
-                </motion.div>
-              </motion.div>
+          {/* Invisible hover buffer */}
+          <div className="absolute -top-3 left-0 w-full h-3" />
+
+          <div className="rounded-2xl overflow-hidden border border-black/10 dark:border-white/10 bg-white/90 dark:bg-[#0f0c09]/90 backdrop-blur-2xl shadow-lg w-[260px] sm:w-[320px]">
+            <div className="p-4 text-sm text-neutral-700 dark:text-neutral-300">
+              {children}
             </div>
-          )}
+          </div>
         </motion.div>
       )}
     </div>
@@ -69,43 +63,11 @@ export const Menu = ({
 }) => {
   return (
     <nav
-      onMouseLeave={() => setActive(null)} // resets the state
-      className="relative rounded-full border border-transparent  dark:border-white/[0.2] bg-[#6a5435] shadow-input flex justify-center space-x-4 px-8 py-6 opacity-90 hover:opacity-95 text-white"
+      onMouseLeave={() => setActive(null)}
+      className="flex items-center justify-center space-x-8 rounded-full border border-black/5 dark:border-white/10 bg-white/40 dark:bg-[#1a1410]/50 backdrop-blur-md shadow-sm px-8 py-3 transition-all duration-300"
     >
       {children}
     </nav>
-  );
-};
-
-export const ProductItem = ({
-  title,
-  description,
-  href,
-  src,
-}: {
-  title: string;
-  description: string;
-  href: string;
-  src: string;
-}) => {
-  return (
-    <a href={href} className="flex space-x-2">
-      <img
-        src={src}
-        width={140}
-        height={70}
-        alt={title}
-        className="shrink-0 rounded-md shadow-2xl"
-      />
-      <div>
-        <h4 className="text-xl font-bold mb-1 text-black dark:text-white">
-          {title}
-        </h4>
-        <p className="text-white text-sm max-w-[10rem]">
-          {description}
-        </p>
-      </div>
-    </a>
   );
 };
 
@@ -113,35 +75,54 @@ export const HoveredLink = ({ children, ...rest }: any) => {
   return (
     <a
       {...rest}
-      className="text-white opacity-100 "
+      className="block text-neutral-700 dark:text-neutral-300 hover:text-[#7e4519] dark:hover:text-[#e5caa5] transition-colors"
     >
       {children}
     </a>
   );
 };
+
 function Navbar({ className }: { className?: string }) {
   const [active, setActive] = useState<string | null>(null);
+
   return (
     <div
-      className={cn("fixed top-10 inset-x-0 max-w-2xl mx-auto z-50", className)}
+      className={cn(
+        "fixed top-6 inset-x-0 max-w-xl mx-auto z-50 transition-all duration-300",
+        className
+      )}
     >
       <Menu setActive={setActive}>
         <MenuItem setActive={setActive} active={active} item="Home">
-          <div className="flex flex-col space-y-4 text-sm">
+          <div className="flex flex-col space-y-2">
             <HoveredLink href="/">Home</HoveredLink>
-            <HoveredLink href="/">About</HoveredLink>
+            <HoveredLink href="/about">About</HoveredLink>
           </div>
         </MenuItem>
+
         <MenuItem setActive={setActive} active={active} item="Projects">
-          <div className="flex flex-col space-y-4 text-sm">
-            <HoveredLink href="/case-priority-app">Case Management Priority App</HoveredLink>
-            <HoveredLink href="/transfer-automation-app">Transfer Automation Tool</HoveredLink>
-            <HoveredLink href="/data-dashboard-app">Data Dashboard</HoveredLink>
+          <div className="flex flex-col space-y-2">
+            <HoveredLink href="/analytic-platform">Clinical Analytic Platform</HoveredLink>
+            <HoveredLink href="/case-priority-app">
+              Case Priority Automation Pipeline
+            </HoveredLink>
+            <HoveredLink href="/transfer-automation-app">
+              Transfer Automation Dashboard
+            </HoveredLink>
+            <HoveredLink href="/data-dashboard-app">
+              Data Analytics Interface
+            </HoveredLink>
+          </div>
+        </MenuItem>
+
+        <MenuItem setActive={setActive} active={active} item="Contact">
+          <div className="flex flex-col space-y-2">
+            <HoveredLink href="/contact">Contact</HoveredLink>
           </div>
         </MenuItem>
       </Menu>
     </div>
   );
 }
-export default Navbar;
 
+export default Navbar;

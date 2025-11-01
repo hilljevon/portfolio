@@ -5,7 +5,7 @@ import { CheckCircleIcon, ChevronDown } from "lucide-react";
 import { useRef } from "react";
 import Image from "next/image";
 
-const sampleImage = "/data_db_snip.png";
+const analyticSnippet = "/reno-dash-snip.png"
 
 function ParallaxSection({
     id,
@@ -50,7 +50,6 @@ function ParallaxSection({
     );
 }
 
-// ✅ Floating Next Section Button with subtitle
 function NextSectionButton({ sectionIds }: { sectionIds: string[] }) {
     const currentRef = useRef(0);
 
@@ -90,7 +89,7 @@ function NextSectionButton({ sectionIds }: { sectionIds: string[] }) {
     );
 }
 
-export default function DataDashboardPost() {
+export default function AnalyticPlatformPost() {
     const highlightsRef = useRef(null);
     const { scrollYProgress } = useScroll({
         target: highlightsRef,
@@ -100,17 +99,18 @@ export default function DataDashboardPost() {
     const y1 = useTransform(scrollYProgress, [0, 1], ["40px", "0px"]);
     const y2 = useTransform(scrollYProgress, [0, 1], ["80px", "0px"]);
     const y3 = useTransform(scrollYProgress, [0, 1], ["120px", "0px"]);
+    const y4 = useTransform(scrollYProgress, [0, 1], ["160px", "0px"]);
 
     const highlights = [
-        "Enabled leadership to monitor team performance trends in real-time.",
-        "Improved visibility into call center efficiency with data-driven insights.",
-        "Built reusable, object-oriented data transformation pipelines in Python.",
+        "Modernized leadership reporting workflows by replacing legacy SAS/Power BI processes.",
+        "Built fully interactive filtering and cross-analysis system across 10+ metrics and dimensions.",
+        "Engineered modular data pipelines in Python and PostgreSQL for real-time metric updates.",
+        "Improved decision-making efficiency, enabling faster staffing and performance insights.",
     ];
 
-    const yValues = [y1, y2, y3];
+    const yValues = [y1, y2, y3, y4];
 
-    // ✅ Define section order for sequential button
-    const sectionIds = ["overview", "data-cleaning", "visualization", "highlights"];
+    const sectionIds = ["overview", "architecture", "explore", "impact", "highlights"];
 
     return (
         <div className="bg-gradient-to-b from-[#fefaf6] to-[#f4e4d0] dark:from-[#0e0a05] dark:to-[#2a2115] min-h-screen px-6 py-24 sm:py-32 lg:px-8 scroll-smooth">
@@ -123,15 +123,15 @@ export default function DataDashboardPost() {
                     className="text-center mb-16"
                 >
                     <p className="text-sm font-semibold uppercase tracking-wide text-[#7e4519] dark:text-[#e5caa5]">
-                        Data Analysis
+                        Analytics & Data Engineering
                     </p>
                     <h1 className="mt-2 text-4xl sm:text-5xl font-bold text-[#3c200b] dark:text-white">
-                        Dynamic Data Dashboard
+                        Clinical Analytics and Insights Platform (SAS Replacement)
                     </h1>
 
                     <div className="my-6 text-lg underline text-blue-500 hover:text-blue-400">
                         <a
-                            href="https://phone-stats-cpfhanb1l-jevons-projects-0dedbb2a.vercel.app/"
+                            href="https://reno-dashboard.vercel.app/"
                             target="_blank"
                             rel="noopener noreferrer"
                         >
@@ -140,19 +140,18 @@ export default function DataDashboardPost() {
                     </div>
 
                     <p className="mt-6 text-lg max-w-2xl mx-auto text-gray-700 dark:text-gray-400">
-                        Developed a data visualization dashboard to transform raw customer
-                        service performance metrics into clear, actionable insights. Built
-                        with Next.js, Pandas, and RechartsJS, this platform helps KP
-                        leadership track operational performance and identify trends in real
-                        time.
+                        Developed a full-stack analytics web platform (Next.js, Python,
+                        PostgreSQL, Spring Boot) as a modern replacement for Power BI/SAS,
+                        enabling real-time data visualization, dynamic filters, and
+                        multi-dimensional exploration of inpatient case metrics.
                     </p>
                 </motion.div>
 
                 {/* HERO IMAGE */}
                 <div className="relative aspect-video overflow-hidden rounded-2xl mb-20 shadow-lg">
                     <Image
-                        src={sampleImage}
-                        alt="Dynamic Data Dashboard preview"
+                        src={analyticSnippet}
+                        alt="Clinical Analytics Platform"
                         width={1200}
                         height={700}
                         className="object-cover w-full h-full"
@@ -163,19 +162,25 @@ export default function DataDashboardPost() {
                 <ParallaxSection
                     id="overview"
                     title="Overview"
-                    content="The dashboard consolidates call performance data from CSV exports into an interactive web interface. Using Pandas, I structured the cleaning logic into reusable, object-oriented methods, ensuring the process scales for future datasets while preserving data integrity."
+                    content="Leadership previously relied on static SAS and Power BI reports that required manual data refreshes and limited interactivity. This platform was built to automate those reports, consolidate KPIs across departments, and allow end-users to filter and cross-analyze metrics in real time."
                 />
 
                 <ParallaxSection
-                    id="data-cleaning"
-                    title="Data Preparation & Cleaning"
-                    content="The original data contained inconsistencies such as null values and mismatched types. Using Pandas, I resolved these issues and standardized the format into clean DataFrames. The cleaning pipeline automatically validated fields and removed duplicates to ensure accuracy."
+                    id="architecture"
+                    title="Architecture"
+                    content="The backend integrates PostgreSQL for storage, Python for preprocessing, and Spring Boot for API orchestration. Data pipelines automatically aggregate monthly case census data and performance metrics. The frontend, built in Next.js and Recharts, dynamically renders data visualizations with customizable filters and category toggles."
                 />
 
                 <ParallaxSection
-                    id="visualization"
-                    title="Visualization & Insights"
-                    content="After preprocessing, I transformed the cleaned data into JSON and fed it into RechartsJS for dynamic chart generation. Each visualization includes hoverable tooltips and transitions, allowing leadership to compare performance metrics across time with precision."
+                    id="explore"
+                    title="Explore Mode"
+                    content="The Explore Mode module allows users to dive deep into performance by RN, facility, or coverage type. Built with React state management and useEffect hooks, it enables real-time filtering and interactive chart transitions. Each filter update triggers dynamic animations and toast notifications for better user feedback."
+                />
+
+                <ParallaxSection
+                    id="impact"
+                    title="Impact"
+                    content="By replacing SAS workflows with a modern, interactive dashboard, this platform cut leadership’s reporting time from days to seconds, improved transparency across teams, and established a reusable, scalable analytics foundation for future machine learning integration."
                 />
 
                 {/* HIGHLIGHTS */}
@@ -213,7 +218,7 @@ export default function DataDashboardPost() {
                 </div>
             </div>
 
-            {/* ✅ Floating “Next Section” Button */}
+            {/* ✅ Floating button */}
             <NextSectionButton sectionIds={sectionIds} />
         </div>
     );
