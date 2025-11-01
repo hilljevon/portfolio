@@ -131,7 +131,7 @@ export default function AnalyticPlatformPost() {
 
                     <div className="my-6 text-lg underline text-blue-500 hover:text-blue-400">
                         <a
-                            href="https://reno-dashboard.vercel.app/"
+                            href="https://reno-dynamic-dashboard.vercel.app"
                             target="_blank"
                             rel="noopener noreferrer"
                         >
